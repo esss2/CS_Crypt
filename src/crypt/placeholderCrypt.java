@@ -33,7 +33,7 @@ public class placeholderCrypt {
 
         System.out.println("Imagen encriptada exitosamente.");
     }
-    public static void decryptImage(String inputFile, String outputFile, SecretKey secretKey) throws Exception {
+    /*public static void decryptImage(String inputFile, String outputFile, SecretKey secretKey) throws Exception {
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
@@ -53,15 +53,16 @@ public class placeholderCrypt {
         outputStream.close();
 
         System.out.println("Imagen desencriptada exitosamente.");
-    }
+    }*/
 
     public static void main(String[] args) throws Exception {
         SecretKey secretKey = generateKey();
         System.out.println("Generated Key: " + secretKey);
-        String inputFile1 ="aqui tmb"; // Reemplaza con la ruta de tu imagen de entrada
-        String Encrypt ="josemanuel aqui tu ruta";  // Reemplaza con la ruta de tu imagen encriptada;
+        String inputFile1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\hola.txt"; // Reemplaza con la ruta de tu imagen de entrada
+        String Encrypt ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\adios.txt";  // Reemplaza con la ruta de tu imagen encriptada;
+        String Decrypt ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\qtal.txt";  // Reemplaza con la ruta de tu imagen encriptada;
         encryptImage(inputFile1,Encrypt,secretKey);
-
+        //decryptImage(Encrypt,Decrypt,secretKey);
 
     }
 }
