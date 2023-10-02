@@ -58,9 +58,8 @@ public class placeholderCrypt {
     public static void main(String[] args) throws Exception {
         SecretKey secretKey = generateKey();
         System.out.println("Generated Key: " + secretKey);
-        String inputFile1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\Tema2-DISM-1.pdf"; // Reemplaza con la ruta de tu imagen de entrada
-        String Encrypt ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\Tema2-DISM-1.pdf";  // Reemplaza con la ruta de tu imagen encriptada;
-        String inputFile2 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\Tema5-DISM-swagger.pdf"; // Reemplaza con la ruta de tu imagen de entrada
+        String inputFile1 ="aqui tmb"; // Reemplaza con la ruta de tu imagen de entrada
+        String Encrypt ="josemanuel aqui tu ruta";  // Reemplaza con la ruta de tu imagen encriptada;
         encryptImage(inputFile1,Encrypt,secretKey);
 
 
