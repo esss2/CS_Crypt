@@ -61,24 +61,27 @@ public class placeholderCrypt {
 
         System.out.println("archivo encriptado exitosamente.\n Archivo de salida: " + outputFile);
     }
-    /*public static void decryptImage(String inputFile, String outputFile, SecretKey secretKey) throws Exception {
+    /*public static void decryptImage(String inputFile, String outputFolder, SecretKey secretKey) throws Exception {
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
         FileInputStream inputStream = new FileInputStream(inputFile);
-        FileOutputStream outputStream = new FileOutputStream(outputFile);
+
 
         CipherInputStream cipherInputStream = new CipherInputStream(inputStream, cipher);
 
         byte[] buffer = new byte[4096];
         int bytesRead;
+        String inputFileName = new File(inputFile).getName();
+        String outputFile = outputFolder + File.separator + inputFileName ;
+        FileOutputStream outputStream2 = new FileOutputStream(outputFile);
 
         while ((bytesRead = cipherInputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
+            outputStream2.write(buffer, 0, bytesRead);
         }
 
         cipherInputStream.close();
-        outputStream.close();
+        outputStream2.close();
 
         System.out.println("Imagen desencriptada exitosamente.");
     }*/
@@ -88,10 +91,12 @@ public class placeholderCrypt {
         System.out.println("Generated Key: " + secretKey);
 
         String inputFile1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\hola.txt"; // Reemplaza con la ruta de tu imagen de entrada
-        String outputfolder ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\EncryptedFiles";  // Reemplaza con la ruta de tu imagen encriptada;
-       // String Decrypt ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\qtal.txt";  // Reemplaza con la ruta de tu imagen encriptada;
-        encryptImage(inputFile1,outputfolder,secretKey);
-        //decryptImage(Encrypt,Decrypt,secretKey);
+        String outputfolder1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\EncryptedFiles";
+       // String outputfolder2 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\DecryptedFiles";
+        // Reemplaza con la ruta de tu imagen encriptada;
+       String Decrypt ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\EncryptedFiles\\hola.txt.encrypted";  // Reemplaza con la ruta de tu imagen encriptada;
+        encryptImage(inputFile1,outputfolder1,secretKey);
+        //decryptImage(Decrypt,outputfolder2,secretKey);
 
     }
 }
