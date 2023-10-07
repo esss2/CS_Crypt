@@ -1,46 +1,35 @@
 package crypt;
 
 import javax.crypto.*;
-import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.io.*;
-import java.security.SecureRandom;
-
+import java.util.Base64;
 public class placeholderCrypt {
-    public static SecretKey generateKey() throws NoSuchAlgorithmException {
+
+    public static SecretKey generateKey(String keyFilePath,String inputFile) throws NoSuchAlgorithmException, IOException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(128);
-        return keyGenerator.generateKey();
-    }
-    /*public static void encryptImage(String inputFile, String outputFile, SecretKey secretKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        SecretKey secretKey = keyGenerator.generateKey();
 
-        FileInputStream inputStream = new FileInputStream(inputFile);
-        FileOutputStream outputStream = new FileOutputStream(outputFile);
+        // Convierte la SecretKey en una cadena Base64
+        String secretKeyString = inputFile+" # "+Base64.getEncoder().encodeToString(secretKey.getEncoded());
 
-        CipherOutputStream cipherOutputStream = new CipherOutputStream(outputStream, cipher);
-
-        byte[] buffer = new byte[4096];
-        int bytesRead;
-
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            cipherOutputStream.write(buffer, 0, bytesRead);
+        // Guarda la clave en un archivo de texto en la ubicación especificada
+        try (FileWriter keyFileWriter = new FileWriter(keyFilePath)) {
+            keyFileWriter.write(secretKeyString);
         }
-
-        inputStream.close();
-        cipherOutputStream.close();
-
-        System.out.println("Imagen encriptada exitosamente.");
-    }*/
-    public static void encryptImage(String inputFile, String outputFolder, SecretKey secretKey) throws Exception {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-
-        FileInputStream inputStream = new FileInputStream(inputFile);
-
+        return secretKey;
+    }
+    public static void encriptaArchivo(String inputFile, String outputFolder,String keyFilePath) throws Exception {
         // Obtiene el nombre del archivo de entrada sin la ruta
         String inputFileName = new File(inputFile).getName();
+        SecretKey secretKey=generateKey(keyFilePath,inputFileName);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+        FileInputStream inputStream = new FileInputStream(inputFile);
+
+
 
         // Genera la ruta completa del archivo de salida en la carpeta especificada
         String outputFile = outputFolder + File.separator + inputFileName + ".encrypted";
@@ -87,16 +76,12 @@ public class placeholderCrypt {
     }*/
 
     public static void main(String[] args) throws Exception {
-        SecretKey secretKey = generateKey();
-        System.out.println("Generated Key: " + secretKey);
+        String keyFilePath = "C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\keys.txt";
 
         String inputFile1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\hola.txt"; // Reemplaza con la ruta de tu imagen de entrada
         String outputfolder1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\EncryptedFiles";
-       // String outputfolder2 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\DecryptedFiles";
-        // Reemplaza con la ruta de tu imagen encriptada;
-       String Decrypt ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\EncryptedFiles\\hola.txt.encrypted";  // Reemplaza con la ruta de tu imagen encriptada;
-        encryptImage(inputFile1,outputfolder1,secretKey);
-        //decryptImage(Decrypt,outputfolder2,secretKey);
+        encriptaArchivo(inputFile1,outputfolder1,keyFilePath);
+
 
     }
 }
