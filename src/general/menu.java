@@ -82,6 +82,7 @@ public class menu {
 
             //creo la clave y llamo a la función de encriptado
             /*
+            aquí falta el tema de hacer la llave y tal
             encryptImage(rutaArchivo, rutaCarpeta, llave);
             */
 
@@ -95,13 +96,16 @@ public class menu {
     public static void opcionDecrypt(){
         ArrayList<String> archivos = new ArrayList<String>();
         String separador = "#";
+        Scanner miScanner = new Scanner(System.in);
+        int opcion = 0;
+        //recupero los archivos para mostrarlos
         try{
-            String path = "../../keys.txt";
+
+            String path = /*"../../keys.txt"*/"C:\\Users\\enriq\\IdeaProjects\\CS_Crypt\\keys.txt";
             BufferedReader lector = new BufferedReader(new FileReader(path));
             String linea;
-            while((linea = lector.readLine()) != null){
-                String archivo =  linea.split(separador)[0];
-                archivos.add(archivo);
+            while((linea = lector.readLine()) != null){;
+                archivos.add(linea);
             }
         }catch(IOException e){
             System.out.println("Ha habido un problema al recuperar los archivos.");
@@ -109,9 +113,27 @@ public class menu {
         }
 
         System.out.println("==========================================================");
-        System.out.println("Estos son los archivos que tienes encriptados en el momento:");
-        for(int i = 0; i<archivos.size(); i++){
-            System.out.println(i + ". " + archivos.get(i));
-        }
+        do{
+            System.out.println("Estos son los archivos que tienes encriptados en el momento:");
+            for(int i = 0; i<archivos.size(); i++){
+                System.out.println(i+1 + ". " + archivos.get(i).split(separador)[0]);
+            }
+            System.out.println("==========================================================");
+            System.out.println("Introduce el número del archivo que quieras encriptar:");
+            if(miScanner.hasNextInt()){
+                opcion = miScanner.nextInt();
+                if(opcion < 1 || opcion > archivos.size()){
+                    opcion = 0;
+                    System.out.println("Escoge una opción correcta, por favor.");
+                }else{
+                    System.out.println("Has elegido encriptar el archivo " + opcion + "->" + archivos.get(opcion-1).split(separador)[0] + ".");
+
+                }
+            }else{
+                System.out.println("Escoge una opción correcta, por favor.");
+                miScanner.next();
+            }
+        }while(opcion < 1 || opcion > archivos.size());
+
     }
 }
