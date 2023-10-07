@@ -2,9 +2,12 @@ package general;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.IOException;
 import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class menu {
 
@@ -47,6 +50,7 @@ public class menu {
                     break;
                 case 2:
                     System.out.println("Has elegido desencriptar un archivo");
+                    opcionDecrypt();
                     break;
                 case 3:
                     System.out.println("Has elegido salir. ¡Hasta luego!");
@@ -78,7 +82,6 @@ public class menu {
 
             //creo la clave y llamo a la función de encriptado
             /*
-            SecretKey llave = generateKey();
             encryptImage(rutaArchivo, rutaCarpeta, llave);
             */
 
@@ -90,6 +93,25 @@ public class menu {
     }
 
     public static void opcionDecrypt(){
+        ArrayList<String> archivos = new ArrayList<String>();
+        String separador = "#";
+        try{
+            String path = "../../keys.txt";
+            BufferedReader lector = new BufferedReader(new FileReader(path));
+            String linea;
+            while((linea = lector.readLine()) != null){
+                String archivo =  linea.split(separador)[0];
+                archivos.add(archivo);
+            }
+        }catch(IOException e){
+            System.out.println("Ha habido un problema al recuperar los archivos.");
+            e.printStackTrace();
+        }
 
+        System.out.println("==========================================================");
+        System.out.println("Estos son los archivos que tienes encriptados en el momento:");
+        for(int i = 0; i<archivos.size(); i++){
+            System.out.println(i + ". " + archivos.get(i));
+        }
     }
 }
