@@ -4,7 +4,7 @@ import javax.crypto.*;
 import java.security.NoSuchAlgorithmException;
 import java.io.*;
 import java.util.Base64;
-public class placeholderCrypt {
+public class Encriptar {
 
     public static SecretKey generateKey(String keyFilePath,String inputFile) throws NoSuchAlgorithmException, IOException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
@@ -81,6 +81,7 @@ public class placeholderCrypt {
         String inputFile1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\hola.txt"; // Reemplaza con la ruta de tu imagen de entrada
         String outputfolder1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\EncryptedFiles";
         encriptaArchivo(inputFile1,outputfolder1,keyFilePath);
+
 
 
     }
