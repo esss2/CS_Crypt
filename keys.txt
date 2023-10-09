@@ -1,0 +1,5 @@
+archivo1.txt#clave1
+archivo2.txt#clave2
+archivo3.txt#clave3
+archivo4.txt#clave4
+archivo5.txt#clave5
