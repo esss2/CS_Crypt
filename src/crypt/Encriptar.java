@@ -76,11 +76,10 @@ public class Encriptar {
     }*/
 
     public static void main(String[] args) throws Exception {
-        String keyFilePath = "C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\keys.txt";
 
-        String inputFile1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\src\\crypt\\hola.txt"; // Reemplaza con la ruta de tu imagen de entrada
-        String outputfolder1 ="C:\\Users\\mgeg2\\IdeaProjects\\CS_Crypt\\EncryptedFiles";
-        encriptaArchivo(inputFile1,outputfolder1,keyFilePath);
+
+
+        //encriptaArchivo(inputFile1,outputfolder1,keyFilePath);
 
 
 
