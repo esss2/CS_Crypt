@@ -1,5 +1,8 @@
 package general;
 
+import crypt.crypt;
+import decrypt.decrypt;
+
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.util.Scanner;
@@ -81,13 +84,12 @@ public class menu {
             System.out.println("Encriptando...");
 
             //creo la clave y llamo a la función de encriptado
-            /*
-            aquí falta el tema de hacer la llave y tal
-            encryptImage(rutaArchivo, rutaCarpeta, llave);
-            */
+            crypt encriptar = new crypt();
+            String rutaLlave = "../keys.txt";
+            encriptar.encriptaArchivo(rutaArchivo, rutaCarpeta, rutaLlave);
 
-        }catch(IOException e){
-            System.out.println("Parece que algo ha fallado copiando el archivo:");
+        }catch(Exception e){
+            System.out.println("Parece que algo ha fallado copiando o encriptando el archivo:");
             System.out.println(e);
             System.out.println("Por favor, inténtelo de nuevo.");
         }
@@ -97,11 +99,12 @@ public class menu {
         ArrayList<String> archivos = new ArrayList<String>();
         String separador = "#";
         Scanner miScanner = new Scanner(System.in);
+        decrypt desencriptar = new decrypt();
         int opcion = 0;
         //recupero los archivos para mostrarlos
         try{
 
-            String path = /*"../../keys.txt"*/"C:\\Users\\enriq\\IdeaProjects\\CS_Crypt\\keys.txt";
+            String path = "../keys.txt";
             BufferedReader lector = new BufferedReader(new FileReader(path));
             String linea;
             while((linea = lector.readLine()) != null){;
@@ -112,28 +115,32 @@ public class menu {
             e.printStackTrace();
         }
 
-        System.out.println("==========================================================");
-        do{
-            System.out.println("Estos son los archivos que tienes encriptados en el momento:");
-            for(int i = 0; i<archivos.size(); i++){
-                System.out.println(i+1 + ". " + archivos.get(i).split(separador)[0]);
-            }
+        try{
             System.out.println("==========================================================");
-            System.out.println("Introduce el número del archivo que quieras encriptar:");
-            if(miScanner.hasNextInt()){
-                opcion = miScanner.nextInt();
-                if(opcion < 1 || opcion > archivos.size()){
-                    opcion = 0;
-                    System.out.println("Escoge una opción correcta, por favor.");
-                }else{
-                    System.out.println("Has elegido encriptar el archivo " + opcion + "->" + archivos.get(opcion-1).split(separador)[0] + ".");
-
+            do{
+                System.out.println("Estos son los archivos que tienes encriptados en el momento:");
+                for(int i = 0; i<archivos.size(); i++){
+                    System.out.println(i+1 + ". " + archivos.get(i).split(separador)[0]);
                 }
-            }else{
-                System.out.println("Escoge una opción correcta, por favor.");
-                miScanner.next();
-            }
-        }while(opcion < 1 || opcion > archivos.size());
-
+                System.out.println("==========================================================");
+                System.out.println("Introduce el número del archivo que quieras encriptar:");
+                if(miScanner.hasNextInt()){
+                    opcion = miScanner.nextInt();
+                    if(opcion < 1 || opcion > archivos.size()){
+                        opcion = 0;
+                        System.out.println("Escoge una opción correcta, por favor.");
+                    }else{
+                        System.out.println("Has elegido encriptar el archivo " + opcion + "->" + archivos.get(opcion-1).split(separador)[0] + ".");
+                        desencriptar.desencriptar(archivos.get(opcion-1).split(separador)[1], archivos.get(opcion-1).split(separador)[0]);
+                    }
+                }else{
+                    System.out.println("Escoge una opción correcta, por favor.");
+                    miScanner.next();
+                }
+            }while(opcion < 1 || opcion > archivos.size());
+        }catch(Exception e){
+            System.out.println("Ha habido un problema al desencriptar el archivo.");
+            e.printStackTrace();
+        }
     }
 }
