@@ -12,13 +12,13 @@ public class crypt {
 
     public crypt(){}
 
-    public SecretKey generateKey(String keyFilePath, String inputFile) throws NoSuchAlgorithmException, IOException {
+    /*public SecretKey generateKey(String keyFilePath, String inputFile) throws NoSuchAlgorithmException, IOException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
         keyGenerator.init(128);
         SecretKey secretKey = keyGenerator.generateKey();
 
         // Convierte la SecretKey en una cadena Base64
-        String secretKeyString = inputFile+"#"+Base64.getEncoder().encodeToString(secretKey.getEncoded())+"\n";
+        String secretKeyString = inputFile + "#" + Base64.getEncoder().encodeToString(secretKey.getEncoded()) + "\n"; // Agregamos "\n" al final
 
         // Guarda la clave en un archivo de texto en la ubicación especificada
         ArrayList<String> archivosLeidos = new ArrayList<String>();
@@ -68,7 +68,30 @@ public class crypt {
             e.printStackTrace();
         }
 
-         */
+
+        return secretKey;
+    }*/
+
+    public SecretKey generateKey(String keyFilePath, String inputFile) throws NoSuchAlgorithmException, IOException {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(128);
+        SecretKey secretKey = keyGenerator.generateKey();
+
+        // Convierte la SecretKey en una cadena Base64
+        String secretKeyString = inputFile + "#" + Base64.getEncoder().encodeToString(secretKey.getEncoded());
+
+        // Guarda la clave en un archivo de texto en la ubicación especificada
+        FileWriter archivoEscritura = null;
+        try {
+            archivoEscritura = new FileWriter(keyFilePath, true); // Abre el archivo en modo de apertura (append)
+            archivoEscritura.write(secretKeyString + "\n"); // Agrega la clave al final del archivo
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (archivoEscritura != null) {
+                archivoEscritura.close();
+            }
+        }
         return secretKey;
     }
     public void encriptaArchivo(String inputFile, String outputFolder,String keyFilePath) throws Exception {
