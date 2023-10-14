@@ -3,8 +3,7 @@ package general;
 import crypt.crypt;
 import decrypt.decrypt;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -166,39 +165,43 @@ public class menu {
             e.printStackTrace();
             return; // Sale del método si hay un problema
         }
-
-        try {
-            System.out.println("==========================================================");
-            System.out.println("Estos son los archivos que tienes encriptados en el momento:");
-            for (int i = 0; i < archivos.size(); i++) {
-                String[] archivoInfo = archivos.get(i).split(separador);
-                System.out.println(i + 1 + ". Nombre del archivo: " + archivoInfo[i]);
-            }
-            System.out.println("==========================================================");
-
-            do {
-                System.out.println("Introduce el número del archivo que quieras desencriptar (o 0 para salir):");
-                if (miScanner.hasNextInt()) {
-                    opcion = miScanner.nextInt();
-                    if (opcion == 0) {
-                        System.out.println("Volviendo al menú principal...");
-                        return; // Sale del método si el usuario selecciona 0
-                    } else if (opcion < 1 || opcion > archivos.size()) {
-                        opcion = 0;
-                        System.out.println("Escoge una opción correcta, por favor.");
-                    } else {
-                        String[] archivoInfo = archivos.get(opcion - 1).split(separador);
-                        System.out.println("Has elegido desencriptar el archivo " + opcion + "->" + archivoInfo[0] + ".");
-                        desencriptar.desencriptar(archivoInfo[1], archivoInfo[0]);
-                    }
-                } else {
-                    System.out.println("Escoge una opción correcta, por favor.");
-                    miScanner.next();
+        if(archivos.isEmpty()){
+            System.out.println("no hay archivos encriptados");
+        }else{
+            try {
+                System.out.println("==========================================================");
+                System.out.println("Estos son los archivos que tienes encriptados en el momento:");
+                for (int i = 0; i < archivos.size(); i++) {
+                    String[] archivoInfo = archivos.get(i).split(separador);
+                    System.out.println(i + 1 + ". Nombre del archivo: " + archivoInfo[i]);
                 }
-            } while (opcion < 1 || opcion > archivos.size());
-        } catch (Exception e) {
-            System.out.println("Ha habido un problema al desencriptar el archivo.");
-            e.printStackTrace();
+                System.out.println("==========================================================");
+
+                do {
+                    System.out.println("Introduce el número del archivo que quieras desencriptar (o 0 para salir):");
+                    if (miScanner.hasNextInt()) {
+                        opcion = miScanner.nextInt();
+                        if (opcion == 0) {
+                            System.out.println("Volviendo al menú principal...");
+                            return; // Sale del método si el usuario selecciona 0
+                        } else if (opcion < 1 || opcion > archivos.size()) {
+                            opcion = 0;
+                            System.out.println("Escoge una opción correcta, por favor.");
+                        } else {
+                            String[] archivoInfo = archivos.get(opcion - 1).split(separador);
+                            System.out.println("Has elegido desencriptar el archivo " + opcion + "->" + archivoInfo[0] + ".");
+                            desencriptar.desencriptar(archivoInfo[1], archivoInfo[0]);
+                        }
+                    } else {
+                        System.out.println("Escoge una opción correcta, por favor.");
+                        miScanner.next();
+                    }
+                } while (opcion < 1 || opcion > archivos.size());
+            } catch (Exception e) {
+                System.out.println("Ha habido un problema al desencriptar el archivo.");
+                e.printStackTrace();
+            }
         }
-    }
+        }
+
 }
