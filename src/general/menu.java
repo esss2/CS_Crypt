@@ -166,7 +166,9 @@ public class menu {
             return; // Sale del método si hay un problema
         }
         if(archivos.isEmpty()){
-            System.out.println("no hay archivos encriptados");
+            System.out.println("==========================================================");
+            System.out.println("Lo siento, en este momento no hay ningún archivo encriptado.");
+            System.out.println("==========================================================");
         }else{
             try {
                 System.out.println("==========================================================");
