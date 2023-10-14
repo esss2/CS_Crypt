@@ -106,7 +106,6 @@ public class menu {
             String linea;
             while ((linea = lector.readLine()) != null) {
                 archivos.add(linea);
-                System.out.println(archivos);
             }
             lector.close(); // Cierra el lector después de usarlo
         } catch (IOException e) {
