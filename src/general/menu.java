@@ -27,7 +27,6 @@ public class menu {
         System.out.println("Bienvenido a Enriptathon, la aplicación para encriptar o desencriptar archivos.");
         System.out.println("==========================================================");
 
-
         do{
             do{
                 System.out.println("¿Qué deseas hacer?");
@@ -43,7 +42,6 @@ public class menu {
                     miScanner.next();
                 }
             }while(opcion < 1 || opcion > 3);
-
 
             switch (opcion){
                 case 1:
@@ -94,55 +92,6 @@ public class menu {
         }
     }
 
-    /*public static void opcionDecrypt(){
-        ArrayList<String> archivos = new ArrayList<String>();
-        String separador = "#";
-        Scanner miScanner = new Scanner(System.in);
-        decrypt desencriptar = new decrypt();
-        int opcion = 0;
-        //recupero los archivos para mostrarlos
-        try{
-
-            String path = "../keys.txt";
-            BufferedReader lector = new BufferedReader(new FileReader(path));
-            System.out.println(lector);
-            String linea;
-            while((linea = lector.readLine()) != null){;
-                archivos.add(linea);
-            }
-        }catch(IOException e){
-            System.out.println("Ha habido un problema al recuperar los archivos.");
-            e.printStackTrace();
-        }
-
-        try{
-            System.out.println("==========================================================");
-            do{
-                System.out.println("Estos son los archivos que tienes encriptados en el momento:");
-                for(int i = 0; i<archivos.size(); i++){
-                    System.out.println(i+1 + ". " + archivos.get(i).split(separador)[0]);
-                }
-                System.out.println("==========================================================");
-                System.out.println("Introduce el número del archivo que quieras encriptar:");
-                if(miScanner.hasNextInt()){
-                    opcion = miScanner.nextInt();
-                    if(opcion < 1 || opcion > archivos.size()){
-                        opcion = 0;
-                        System.out.println("Escoge una opción correcta, por favor.");
-                    }else{
-                        System.out.println("Has elegido encriptar el archivo " + opcion + "->" + archivos.get(opcion-1).split(separador)[0] + ".");
-                        desencriptar.desencriptar(archivos.get(opcion-1).split(separador)[1], archivos.get(opcion-1).split(separador)[0]);
-                    }
-                }else{
-                    System.out.println("Escoge una opción correcta, por favor.");
-                    miScanner.next();
-                }
-            }while(opcion < 1 || opcion > archivos.size());
-        }catch(Exception e){
-            System.out.println("Ha habido un problema al desencriptar el archivo.");
-            e.printStackTrace();
-        }
-    }*/
     public static void opcionDecrypt() {
         ArrayList<String> archivos = new ArrayList<String>();
         String separador = "#";
@@ -175,7 +124,7 @@ public class menu {
                 System.out.println("Estos son los archivos que tienes encriptados en el momento:");
                 for (int i = 0; i < archivos.size(); i++) {
                     String[] archivoInfo = archivos.get(i).split(separador);
-                    System.out.println(i + 1 + ". Nombre del archivo: " + archivoInfo[i]);
+                    System.out.println(i + 1 + ". Nombre del archivo: " + archivoInfo[0]);
                 }
                 System.out.println("==========================================================");
 
@@ -204,6 +153,5 @@ public class menu {
                 e.printStackTrace();
             }
         }
-        }
-
+    }
 }
